@@ -14,4 +14,4 @@ To run the Scala code for this chapter use:
 
  **sbt clean compile**
 
-And re-start the process (step 1 **sbt clean package** and so on) with 
+And re-start the process (step 1 **sbt clean package** and so on)
