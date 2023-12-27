@@ -10,7 +10,7 @@ To run the Scala code for this chapter use:
 
  ### IMPORTANT NOTE
 
- If ay problem occurs when build the scala project hwen perform the setp (**sbt clean package**), then pwerform the following command.
+ If any problem occurs when building the scala project in the setp 1 (**sbt clean package**), then perform the following command in order to solve intance problems:.
 
  **sbt clean compile**
 
