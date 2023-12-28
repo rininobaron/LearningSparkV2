@@ -2,7 +2,7 @@ package main.scala.chapter3
 
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types._
-import org.apache.spark.sql.functions.{col, expr}
+import org.apache.spark.sql.functions._
 
 object Example3_7 {
   def main(args: Array[String]) {
@@ -40,6 +40,17 @@ object Example3_7 {
     blogsDF.select(expr("Hits * 2")).show(2)
    // show heavy hitters
    blogsDF.withColumn("Big Hitters", (expr("Hits > 10000"))).show()
+
+   // Concatenate three columns, create a new column, and show the
+   // newly created concatenated column
+   blogsDF
+   .withColumn("AuthorsId", (concat(expr("First"), expr("Last"), expr("Id"))))
+   .select(col("AuthorsId"))
+   .show(4)
+
+   // Sort by column "Id" in descending order
+   blogsDF.sort(col("Id").desc).show()
+   //blogsDF.sort($"Id".desc).show()
 
   }
 }
