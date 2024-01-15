@@ -51,3 +51,7 @@ fireDF.select("CallType").where(col("CallType").isNotNull).agg(countDistinct('Ca
 
 // Filter for only distinct non-null CallTypes from all the rows
 fireDF.select("CallType").where(col("CallType").isNotNull).distinct().show(10, false)
+
+// Rename column "Delay"
+val newFireDF = fireDF.withColumnRenamed("Delay", "ResponseDelayedinMins")
+newFireDF.select("ResponseDelayedinMins").where($"ResponseDelayedinMins" > 5).show(5, false)
