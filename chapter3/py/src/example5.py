@@ -102,3 +102,10 @@ fire_ts_df = (new_fire_df
 .count()
 .orderBy("count", ascending=False)
 .show(n=10, truncate=False))
+
+# Perform some statistical queries in a pythonic way
+import pyspark.sql.functions as F
+(fire_ts_df
+.select(F.sum("NumAlarms"), F.avg("ResponseDelayedinMins"),
+F.min("ResponseDelayedinMins"), F.max("ResponseDelayedinMins"))
+.show())
