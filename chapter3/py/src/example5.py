@@ -86,3 +86,19 @@ fire_ts_df = (new_fire_df
 (fire_ts_df
 .select("IncidentDate", "OnWatchDate", "AvailableDtTS")
 .show(5, False))
+
+# Perform some queries using date functions
+(fire_ts_df
+.select(year('IncidentDate'))
+.distinct()
+.orderBy(year('IncidentDate'))
+.show())
+
+# Look for most common types of fira calls
+(fire_ts_df
+.select("CallType")
+.where(col("CallType").isNotNull())
+.groupBy("CallType")
+.count()
+.orderBy("count", ascending=False)
+.show(n=10, truncate=False))
