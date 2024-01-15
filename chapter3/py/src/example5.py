@@ -65,3 +65,10 @@ from pyspark.sql.functions import *
 	.where(col("CallType").isNotNull())
 	.distinct()
 	.show(10, False))
+
+# Rename column "Delay""
+new_fire_df = fire_df.withColumnRenamed("Delay", "ResponseDelayedinMins")
+(new_fire_df
+.select("ResponseDelayedinMins")
+.where(col("ResponseDelayedinMins") > 5)
+.show(5, False))
