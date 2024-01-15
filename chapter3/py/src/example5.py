@@ -72,3 +72,17 @@ new_fire_df = fire_df.withColumnRenamed("Delay", "ResponseDelayedinMins")
 .select("ResponseDelayedinMins")
 .where(col("ResponseDelayedinMins") > 5)
 .show(5, False))
+
+# Convert column format to timestamp type
+fire_ts_df = (new_fire_df
+.withColumn("IncidentDate", to_timestamp(col("CallDate"), "MM/dd/yyyy"))
+.drop("CallDate")
+.withColumn("OnWatchDate", to_timestamp(col("WatchDate"), "MM/dd/yyyy"))
+.drop("WatchDate")
+.withColumn("AvailableDtTS", to_timestamp(col("AvailableDtTm"),
+"MM/dd/yyyy hh:mm:ss a"))
+.drop("AvailableDtTm"))
+# Select the converted columns
+(fire_ts_df
+.select("IncidentDate", "OnWatchDate", "AvailableDtTS")
+.show(5, False))
